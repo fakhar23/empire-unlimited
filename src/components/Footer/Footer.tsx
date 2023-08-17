@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import InputUnderLine from "../../assets/imges/InputUnderLine.svg";
-import Button from "../Buttons/Button";
+import Button from "../Button/Button";
 import { BsInstagram } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
 import { BsFacebook } from "react-icons/bs";
@@ -11,13 +11,14 @@ import { Link } from "react-router-dom";
 interface Props {}
 
 function Footer(props: Props) {
+  console.log("props: ", props);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    switch (name) {
+    const { name: inputName, value } = e.target;
+    switch (inputName) {
       case "name":
         setName(value);
         break;
@@ -103,7 +104,7 @@ interface CustomInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput = ({ type, placeholder, name, value, onChange }: CustomInputProps) => {
+function CustomInput({ type, placeholder, name, value, onChange }: CustomInputProps) {
   return (
     <>
       <input
@@ -120,4 +121,4 @@ const CustomInput = ({ type, placeholder, name, value, onChange }: CustomInputPr
       <img src={InputUnderLine} className="mb-[20px]" />
     </>
   );
-};
+}

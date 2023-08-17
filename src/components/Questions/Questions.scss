@@ -1,0 +1,17 @@
+.MuiSlider-markLabel {
+  color: white !important;
+  color: #fff;
+  text-align: center;
+  font-family: Istok Web;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 92.308% */
+  margin-top: 16px;
+}
+
+.selected-button {
+  background: hsl(0deg 0% 11.18%);
+  filter: brightness(1.5);
+  border: 2px solid grey;
+}

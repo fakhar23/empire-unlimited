@@ -1,21 +1,41 @@
 import React from "react";
 // import BreadCrum from "../../assets/imges/BreadCrum.svg";
-type Props = {
-  activeStep: "Online Earning" | "Earning Income" | "Spending Time" | "Investment";
-};
 
-const steps = ["Online Earning", "Earning Income", "Spending Time", "Investment"];
+import { quizSteps, QuizStep } from "../../App";
 
-export default function BreadCrums({ activeStep }: Props) {
-  const getColor = (step: string) => (activeStep === step ? "white" : "#a7a7a7");
+interface Props {
+  activeStep: QuizStep;
+  setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+}
+
+export default function BreadCrums({ activeStep, setActiveStep }: Props) {
+  const Iscompleted = (someStep: QuizStep) => {
+    const indexOfActiveSetp = quizSteps.findIndex((step) => activeStep === step);
+    const indexOfSomeSetp = quizSteps.findIndex((step) => someStep === step);
+    return indexOfSomeSetp < indexOfActiveSetp;
+  };
+
+  const getTextColor = (step: QuizStep) =>
+    activeStep === step ? "white" : Iscompleted(step) ? "white" : "#a7a7a7";
+
+  const breadCrumClickHandler = (e: React.MouseEvent<HTMLParagraphElement>) => {
+    if (Iscompleted(e.currentTarget.innerText as QuizStep))
+      setActiveStep(e.currentTarget.innerText as QuizStep);
+  };
 
   return (
     <div className="bg-[#282828] flex justify-evenly items-center text-[#A7A7A7] font-IstokWeb text-24">
-      {steps.map((step, index) => (
+      {quizSteps.map((step, index) => (
         <React.Fragment key={index}>
-          <p style={{ color: getColor(step) }}>{step}</p>
-          {index !== steps.length - 1 && (
-            <BreadCrum fill={getColor(step) === "white" ? "white" : undefined} />
+          <p
+            style={{ color: getTextColor(step) }}
+            onClick={breadCrumClickHandler}
+            className={Iscompleted(step) ? "cursor-pointer" : ""}
+          >
+            {step}
+          </p>
+          {index !== quizSteps.length - 1 && (
+            <BreadCrum fill={Iscompleted(step) ? "white" : undefined} />
           )}
         </React.Fragment>
       ))}
