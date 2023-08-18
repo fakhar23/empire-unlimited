@@ -10,6 +10,7 @@ import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { selectInvestment } from "../../redux/question4.slice";
 import { setEmail } from "../../redux/question5.slice";
+import { useNavigate } from "react-router-dom";
 
 interface Question4Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
@@ -152,6 +153,7 @@ interface question5Props {
 const Question5 = ({ setShowQuestion5 }: question5Props) => {
   const email = useSelector((state: RootState) => state.question5);
   const redux = useSelector((state: RootState) => state);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
@@ -178,8 +180,8 @@ const Question5 = ({ setShowQuestion5 }: question5Props) => {
         <div
           onClick={() => {
             if (!email) return alert("Please enter your Email");
-            alert("completed");
             console.log("redux", redux);
+            navigate("/results");
           }}
         >
           <Button className="text-white">Next</Button>

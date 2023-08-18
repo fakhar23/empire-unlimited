@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import InputUnderLine from "../../assets/imges/InputUnderLine.svg";
+import InputUnderLine from "../../assets/images/InputUnderLine.svg";
 import Button from "../Button/Button";
 import { BsInstagram } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";

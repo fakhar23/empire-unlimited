@@ -1,5 +1,5 @@
 import React from "react";
-// import BreadCrum from "../../assets/imges/BreadCrum.svg";
+// import BreadCrum from "../../assets/images/BreadCrum.svg";
 
 import { quizSteps, QuizStep } from "../../App";
 
@@ -30,7 +30,7 @@ export default function BreadCrums({ activeStep, setActiveStep }: Props) {
           <p
             style={{ color: getTextColor(step) }}
             onClick={breadCrumClickHandler}
-            className={(Iscompleted(step) ? "cursor-pointer" : "") + "font-istok"}
+            className={"font-istok" + (Iscompleted(step) ? " cursor-pointer" : "")}
           >
             {step}
           </p>
