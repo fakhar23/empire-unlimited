@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Button from "../Button/Button";
 import { styled } from "@mui/system";
 import Slider from "@mui/material/Slider";
@@ -9,56 +9,41 @@ import { quizSteps } from "../../App";
 import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { selectInvestment } from "../../redux/question4.slice";
-import { setEmail } from "../../redux/question5.slice";
-import { useNavigate } from "react-router-dom";
 
 interface Question4Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
 }
 
 const Question4: React.FC<Question4Props> = ({ setActiveStep }) => {
-  const dispatch = useDispatch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
-  const redux = useSelector((state: RootState) => state);
-  const sliderValue = useSelector((state: RootState) => state.question4);
-
-  const [showQuestion5, setShowQuestion5] = useState<boolean>(false);
-
-  if (!showQuestion5)
-    return (
-      <section>
-        <div className="m-auto text-center max-w-[70%] question-div">
-          <div className="flex gap-[14px] items-center mb-20 justify-center question-number-and-question">
-            <p className="text-6xl leading-6 font-bold text-white question-number">4.</p>
-            <p className="text-white text-[28px] leading-6 font-bold leading-[146%]">
-              How much are you able to invest in coaching, training or mentorship to learn the
-              skills you need to start earning money online - today?
-            </p>
-          </div>
-          <div ref={sliderRef} className="max-w-[80%] m-auto">
-            <MySlider />
-          </div>
-        </div>
-        <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
-          <div onClick={() => setActiveStep(quizSteps[2])}>
-            <Button className="text-white">Back</Button>
-          </div>
-          <div
-            onClick={() => {
-              // setActiveStep(quizSteps[2]);
-              setShowQuestion5(true);
-            }}
-          >
-            <Button className="text-white">Next</Button>
-          </div>
-        </div>
-      </section>
-    );
 
   return (
-    <>
-      <Question5 setShowQuestion5={setShowQuestion5} />
-    </>
+    <section>
+      <div className="m-auto text-center max-w-[70%] question-div">
+        <div className="flex gap-[14px] items-center mb-20 justify-center question-number-and-question">
+          <p className="text-6xl leading-6 font-bold text-white question-number">4.</p>
+          <p className="text-white text-[28px] leading-6 font-bold leading-[146%]">
+            How much are you able to invest in coaching, training or mentorship to learn the skills
+            you need to start earning money online - today?
+          </p>
+        </div>
+        <div ref={sliderRef} className="max-w-[80%] m-auto">
+          <MySlider />
+        </div>
+      </div>
+      <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
+        <div onClick={() => setActiveStep(quizSteps[2])}>
+          <Button className="text-white">Back</Button>
+        </div>
+        <div
+          onClick={() => {
+            setActiveStep(quizSteps[4]);
+          }}
+        >
+          <Button className="text-white">Next</Button>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -145,48 +130,3 @@ function MySlider() {
 }
 
 export default Question4;
-
-interface question5Props {
-  setShowQuestion5: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Question5 = ({ setShowQuestion5 }: question5Props) => {
-  const email = useSelector((state: RootState) => state.question5);
-  const redux = useSelector((state: RootState) => state);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  return (
-    <>
-      <div className="m-auto text-center max-w-[70%] question-div">
-        <div className="flex gap-[14px] items-center mb-20 justify-center question-number-and-question">
-          <p className="text-6xl leading-6 font-bold text-white question-number">5.</p>
-          <p className="text-white text-[28px]  font-bold leading-[146%]">
-            Enter your Email to Subscribe our Newsletter
-          </p>
-        </div>
-        <input
-          value={email || ""}
-          type="email"
-          placeholder="Type here..."
-          className="rounded-[10px] px-5 py-3 flex- w-[60%] email-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setEmail(e.target.value))}
-        />
-      </div>
-      <div className="flex justify-between m-auto mt-[62px] w-[60%] next-n-back-buttons">
-        <div onClick={() => setShowQuestion5(false)}>
-          <Button className="text-white">Back</Button>
-        </div>
-        <div
-          onClick={() => {
-            if (!email) return alert("Please enter your Email");
-            console.log("redux", redux);
-            navigate("/results");
-          }}
-        >
-          <Button className="text-white">Next</Button>
-        </div>
-      </div>
-    </>
-  );
-};

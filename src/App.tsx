@@ -7,12 +7,18 @@ import Questions from "./components/Questions/Questions";
 import { useState } from "react";
 import Results from "./containers/Results";
 
-export type QuizStep = "Online Earning" | "Earning Income" | "Spending Time" | "Investment";
+export type QuizStep =
+  | "Online Earning"
+  | "Earning Income"
+  | "Spending Time"
+  | "Investment"
+  | "Email";
 export const quizSteps: QuizStep[] = [
   "Online Earning",
   "Earning Income",
   "Spending Time",
   "Investment",
+  "Email",
 ];
 
 function App() {

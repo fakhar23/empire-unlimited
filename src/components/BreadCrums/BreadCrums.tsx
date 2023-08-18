@@ -15,6 +15,8 @@ export default function BreadCrums({ activeStep, setActiveStep }: Props) {
     return indexOfSomeSetp < indexOfActiveSetp;
   };
 
+  const quizStepsBreadCrum = [...quizSteps].slice(0, -1);
+
   const getTextColor = (step: QuizStep) =>
     activeStep === step ? "white" : Iscompleted(step) ? "white" : "#a7a7a7";
 
@@ -25,7 +27,7 @@ export default function BreadCrums({ activeStep, setActiveStep }: Props) {
 
   return (
     <div className="bg-[#282828] flex justify-evenly items-center text-[#A7A7A7] font-IstokWeb text-24 px-3">
-      {quizSteps.map((step, index) => (
+      {quizStepsBreadCrum.map((step, index) => (
         <React.Fragment key={index}>
           <p
             style={{ color: getTextColor(step) }}

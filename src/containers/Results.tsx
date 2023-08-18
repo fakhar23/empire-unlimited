@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import "./Results.scss";
 import resultsImage from "../assets/images/image 3.png";
 import { BsChevronLeft } from "react-icons/bs";
@@ -7,8 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
-function Results({}: Props) {
+function Results(prop: Props) {
+  console.log("prop: ", prop);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
