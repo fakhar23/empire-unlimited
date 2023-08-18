@@ -6,7 +6,7 @@ import { BsTwitter } from "react-icons/bs";
 import { BsFacebook } from "react-icons/bs";
 import { BsGlobe } from "react-icons/bs";
 import { Link } from "react-router-dom";
-// import "./Footer.scss";
+import "./Footer.scss";
 
 interface Props {}
 
@@ -34,7 +34,7 @@ function Footer(props: Props) {
   };
 
   return (
-    <div className="flex justify-between  bg-background-black text-white gap-20 footer-component px-12 pb-9">
+    <footer className="flex justify-between  text-white gap-20 footer-component px-12 pb-9 flex-wrap  bg-[#2a2626] ">
       <div className="flex basis-[409px] flex-grow shrink flex-col">
         <p className=" font-bold text-[41px] leading-[35px] mb-[11px]">Get in Touch</p>
         <p className="font-medium leading-[25px] text-lg mb-[19px]">Be Part Of Something Greater</p>
@@ -90,7 +90,7 @@ function Footer(props: Props) {
           <p className="">support@gymthriller.com</p>
         </Link>
       </div>
-    </div>
+    </footer>
   );
 }
 

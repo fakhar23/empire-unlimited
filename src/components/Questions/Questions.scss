@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "Lufga";
+  src: url("../../assets/fonts/Lufga/Demo_Fonts/Fontspring-DEMO-lufga-regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lufga";
+  src: url("../../assets/fonts/Lufga/Demo_Fonts/Fontspring-DEMO-lufga-medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lufga";
+  src: url("../../assets/fonts/Lufga/Demo_Fonts/Fontspring-DEMO-lufga-semibold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lufga";
+  src: url("../../assets/fonts/Lufga/Demo_Fonts/Fontspring-DEMO-lufga-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* If you want to include the Impacted variant, you can add another @font-face block: 
+@font-face {
+  font-family: 'Impacted';
+  src: url('./assets/fonts/Impact/Impacted.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+
 .MuiSlider-markLabel {
   color: white !important;
   color: #fff;
@@ -14,4 +54,65 @@
   background: hsl(0deg 0% 11.18%);
   filter: brightness(1.5);
   border: 2px solid grey;
+}
+
+.question-text {
+  font-family: "Lufga", sans-serif;
+}
+
+.options-button-group {
+  gap: 8rem;
+  width: fit-content;
+}
+@media (max-width: 1000px) {
+  .options-button-group {
+    gap: 1rem;
+    width: auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    button {
+      flex-grow: 1;
+    }
+  }
+}
+@media (max-width: 650px) {
+  body {
+    .options-button-group {
+      margin-bottom: 1rem;
+    }
+    .questions-section {
+      padding-inline: 16px;
+    }
+    .next-n-back-buttons {
+      margin-top: 80px;
+    }
+    .email-input {
+      width: 80%;
+    }
+  }
+}
+@media (max-width: 450px) {
+  body {
+    .question-number {
+      font-size: 2rem;
+    }
+    .next-n-back-buttons {
+      width: 100%;
+      margin-top: 64px;
+    }
+    .question-div {
+      max-width: 100%;
+    }
+    .email-input {
+      width: 90%;
+    }
+  }
+}
+@media (max-width: 450px) {
+  body {
+    .question-number-and-question {
+      flex-direction: column;
+    }
+  }
 }

@@ -1,0 +1,22 @@
+// IMPACT
+@font-face {
+  font-family: "Impact";
+  src: url("../../assets/fonts/Impact/impact.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header-text {
+  font-family: "Impact", sans-serif;
+}
+
+@media (max-width: 800px) {
+  body .header-text {
+    font-size: 56px;
+  }
+}
+@media (max-width: 450px) {
+  body .header-text {
+    font-size: 36px;
+  }
+}

@@ -33,18 +33,18 @@ const Question1: React.FC<Question1Props> = ({ setActiveStep }) => {
   const [inputWidth, setInputWidth] = useState<number | string>("auto");
   useLayoutEffect(() => {
     setInputWidth(ButtonsRef.current?.clientWidth || "auto");
-  }, []);
+  });
 
   return (
     <>
-      <div className="m-auto text-center">
-        <div className="flex gap-[14px] items-center mb-20 justify-center w-fit-content mx-auto">
-          <p className="text-6xl leading-6 font-bold text-white">1.</p>
-          <p className="text-white text-[28px] leading-6 font-bold ">
+      <div className="m-auto text-center question-div">
+        <div className="flex gap-[14px] items-center mb-20 justify-center w-fit-content mx-auto question-number-and-question">
+          <p className="text-6xl leading-6 font-bold text-white question-number">1.</p>
+          <p className="text-white text-[28px] leading-6 font-bold leading-[146%]">
             Why do you want to earn more money online?
           </p>
         </div>
-        <div className="flex gap-32 justify-center m-auto w-fit mb-16" ref={ButtonsRef}>
+        <div className="flex  m-auto mb-16 options-button-group" ref={ButtonsRef}>
           {question1ptions.map((optionValue) => (
             <button
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,7 +78,7 @@ const Question1: React.FC<Question1Props> = ({ setActiveStep }) => {
             setActiveStep("Earning Income");
           }}
         >
-          <Button className="text-white text-[27px] leading-6 ">Next</Button>
+          <Button className="text-white font-semibold  ">Next</Button>
         </div>
       </div>
     </>

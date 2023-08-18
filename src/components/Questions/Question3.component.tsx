@@ -20,10 +20,10 @@ const Question3: React.FC<Question3Props> = ({ setActiveStep }) => {
 
   return (
     <>
-      <div className="m-auto text-center">
-        <div className="flex gap-[14px] items-center mb-20 justify-center w-fit-content mx-auto">
-          <p className="text-6xl leading-6 font-bold text-white">3.</p>
-          <p className="text-white text-[28px] leading-6 font-bold ">
+      <div className="m-auto text-center question-div">
+        <div className="flex gap-[14px] items-center mb-20 justify-center w-fit-content mx-auto question-number-and-question">
+          <p className="text-6xl leading-6 font-bold text-white question-number">3.</p>
+          <p className="text-white text-[28px] leading-6 font-bold leading-[146%]">
             How much time are you able to spend on your side hustle every week?
           </p>
         </div>
@@ -45,7 +45,7 @@ const Question3: React.FC<Question3Props> = ({ setActiveStep }) => {
           ))}
         </div>
 
-        <div className="flex justify-between m-auto mt-[132px] w-[80%]">
+        <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
           <div onClick={() => setActiveStep(quizSteps[1])}>
             <Button className="text-white">Back</Button>
           </div>

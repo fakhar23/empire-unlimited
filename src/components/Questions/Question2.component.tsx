@@ -22,18 +22,18 @@ const Question2: React.FC<Question2Props> = ({ setActiveStep }) => {
 
   return (
     <>
-      <div className="m-auto text-center max-w-[70%]">
-        <div className="flex gap-[14px] items-center mb-20 justify-center">
-          <p className="text-6xl leading-6 font-bold text-white">2.</p>
-          <p className="text-white text-[28px] leading-6 font-bold">
+      <div className="m-auto text-center max-w-[70%] question-div">
+        <div className="flex gap-[14px] items-center mb-20 justify-center question-number-and-question">
+          <p className="text-6xl leading-6 font-bold text-white question-number">2.</p>
+          <p className="text-white text-[28px] leading-6 font-bold leading-[146%]">
             How much additional income do you want to earn every month?
           </p>
         </div>
-        <div ref={sliderRef}>
+        <div ref={sliderRef} className="max-w-[80%] m-auto">
           <MySlider />
         </div>
       </div>
-      <div className="flex justify-between m-auto mt-[132px] w-[80%]">
+      <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
         <div onClick={() => setActiveStep(quizSteps[0])}>
           <Button className="text-white">Back</Button>
         </div>
