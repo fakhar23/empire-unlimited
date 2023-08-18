@@ -12,9 +12,10 @@ import { selectInvestment } from "../../redux/question4.slice";
 
 interface Question4Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-const Question4: React.FC<Question4Props> = ({ setActiveStep }) => {
+const Question4: React.FC<Question4Props> = ({ setActiveStep, directionHandler }) => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
   return (
@@ -32,11 +33,17 @@ const Question4: React.FC<Question4Props> = ({ setActiveStep }) => {
         </div>
       </div>
       <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
-        <div onClick={() => setActiveStep(quizSteps[2])}>
+        <div
+          onClick={() => {
+            directionHandler("Back");
+            setActiveStep(quizSteps[2]);
+          }}
+        >
           <Button className="text-white">Back</Button>
         </div>
         <div
           onClick={() => {
+            directionHandler("Next");
             setActiveStep(quizSteps[4]);
           }}
         >

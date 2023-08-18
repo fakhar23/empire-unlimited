@@ -8,9 +8,10 @@ import Button from "../Button/Button";
 interface question5Props {
   setShowQuestion5?: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-const Question5 = ({ setActiveStep }: question5Props) => {
+const Question5 = ({ setActiveStep, directionHandler }: question5Props) => {
   const email = useSelector((state: RootState) => state.question5);
   const redux = useSelector((state: RootState) => state);
   const navigate = useNavigate();
@@ -34,7 +35,12 @@ const Question5 = ({ setActiveStep }: question5Props) => {
         />
       </div>
       <div className="flex justify-between m-auto mt-[62px] w-[60%] next-n-back-buttons">
-        <div onClick={() => setActiveStep(quizSteps[3])}>
+        <div
+          onClick={() => {
+            directionHandler("Back");
+            setActiveStep(quizSteps[3]);
+          }}
+        >
           <Button className="text-white">Back</Button>
         </div>
         <div

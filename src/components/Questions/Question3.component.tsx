@@ -6,9 +6,10 @@ import { setWeeklyTime } from "../../redux/question3.slice";
 
 interface Question3Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-const Question3: React.FC<Question3Props> = ({ setActiveStep }) => {
+const Question3: React.FC<Question3Props> = ({ setActiveStep, directionHandler }) => {
   const dispatch = useDispatch();
   const weeklyTime = useSelector((state: RootState) => state.question3);
 
@@ -46,12 +47,18 @@ const Question3: React.FC<Question3Props> = ({ setActiveStep }) => {
         </div>
 
         <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
-          <div onClick={() => setActiveStep(quizSteps[1])}>
+          <div
+            onClick={() => {
+              directionHandler("Back");
+              setActiveStep(quizSteps[1]);
+            }}
+          >
             <Button className="text-white">Back</Button>
           </div>
           <div
             onClick={() => {
               if (!weeklyTime) return alert("Please select on Option");
+              directionHandler("Next");
               setActiveStep(quizSteps[3]);
             }}
           >

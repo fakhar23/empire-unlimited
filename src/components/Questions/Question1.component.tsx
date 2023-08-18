@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 
 export type Question1ptions = "Pay Off Debit" | "Travel The World" | "Take Care of Family" | string;
 import { QuizStep } from "../../App";
+import { setDirection } from "../../redux/direction.slice";
 
 const question1ptions: Question1ptions[] = [
   "Pay Off Debit",
@@ -15,9 +16,10 @@ const question1ptions: Question1ptions[] = [
 
 interface Question1Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-const Question1: React.FC<Question1Props> = ({ setActiveStep }) => {
+const Question1: React.FC<Question1Props> = ({ setActiveStep, directionHandler }) => {
   const ButtonsRef = useRef<HTMLDivElement | null>(null);
   const question1Value = useSelector((state: RootState) => state.question1);
   const InputRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +35,7 @@ const Question1: React.FC<Question1Props> = ({ setActiveStep }) => {
   const [inputWidth, setInputWidth] = useState<number | string>("auto");
   useLayoutEffect(() => {
     setInputWidth(ButtonsRef.current?.clientWidth || "auto");
-  });
+  }, []);
 
   return (
     <>
@@ -75,6 +77,7 @@ const Question1: React.FC<Question1Props> = ({ setActiveStep }) => {
         <div
           onClick={() => {
             if (!question1Value) return alert("Please select an option");
+            directionHandler("Next");
             setActiveStep("Earning Income");
           }}
         >

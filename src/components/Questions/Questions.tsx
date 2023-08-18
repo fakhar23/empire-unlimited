@@ -7,21 +7,27 @@ import "./Questions.scss";
 import { QuizStep } from "../../App";
 import Question4 from "./Question4.component";
 import Question5 from "./Question5.component";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   activeStep: QuizStep;
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
+  reverseDirection: boolean;
 }
 
-import { motion, AnimatePresence } from "framer-motion";
+const Questions = ({ activeStep, setActiveStep, directionHandler, reverseDirection }: Props) => {
+  const slideFromRight = {
+    initial: { x: "100%", opacity: 1 },
+    animate: { x: 0, opacity: 1, transition: { type: "tween" } },
+    exit: { x: "-100%", opacity: 1, transition: { type: "tween" } },
+  };
+  const slideFromLeft = {
+    initial: { x: "-100%", opacity: 0 },
+    animate: { x: 0, opacity: 1, transition: { type: "tween" } },
+    exit: { x: "100%", opacity: 0, transition: { type: "tween" } },
+  };
 
-const slideFromRight = {
-  initial: { x: "100%", opacity: 1 },
-  animate: { x: 0, opacity: 1, transition: { type: "tween" } },
-  exit: { x: "-100%", opacity: 1, transition: { type: "tween" } },
-};
-
-const Questions = ({ activeStep, setActiveStep }: Props) => {
   return (
     <section className="pt-[59px] pb-[30px] px-12 bg-background-black questions-section">
       <h1 className="text-[46px] text-white font-bold text-center mb-[35px]">Questionnaire</h1>
@@ -32,37 +38,37 @@ const Questions = ({ activeStep, setActiveStep }: Props) => {
       <div className="overflow-x-hidden">
         <AnimatePresence mode="wait">
           {activeStep === "Online Earning" && (
-            <motion.div key="q1" {...slideFromRight}>
+            <motion.div key="q1" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
               <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question1 setActiveStep={setActiveStep} />
+                <Question1 setActiveStep={setActiveStep} directionHandler={directionHandler} />
               </div>
             </motion.div>
           )}
           {activeStep === "Earning Income" && (
-            <motion.div key="q2" {...slideFromRight}>
+            <motion.div key="q2" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
               <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question2 setActiveStep={setActiveStep} />
+                <Question2 setActiveStep={setActiveStep} directionHandler={directionHandler} />
               </div>
             </motion.div>
           )}
           {activeStep === "Spending Time" && (
-            <motion.div key="q3" {...slideFromRight}>
+            <motion.div key="q3" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
               <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question3 setActiveStep={setActiveStep} />
+                <Question3 setActiveStep={setActiveStep} directionHandler={directionHandler} />
               </div>
             </motion.div>
           )}
           {activeStep === "Investment" && (
-            <motion.div key="q4" {...slideFromRight}>
+            <motion.div key="q4" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
               <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question4 setActiveStep={setActiveStep} />
+                <Question4 setActiveStep={setActiveStep} directionHandler={directionHandler} />
               </div>
             </motion.div>
           )}
           {activeStep === "Email" && (
-            <motion.div key="q5" {...slideFromRight}>
+            <motion.div key="q5" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
               <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question5 setActiveStep={setActiveStep} />
+                <Question5 setActiveStep={setActiveStep} directionHandler={directionHandler} />
               </div>
             </motion.div>
           )}

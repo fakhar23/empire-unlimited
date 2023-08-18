@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Questions from "./components/Questions/Questions";
 import { useState } from "react";
 import Results from "./containers/Results";
+import { flushSync } from "react-dom";
 
 export type QuizStep =
   | "Online Earning"
@@ -23,7 +24,13 @@ export const quizSteps: QuizStep[] = [
 
 function App() {
   const [activeStep, setActiveStep] = useState<QuizStep>("Online Earning");
-  console.log("activeStep: ", activeStep);
+  const [reverseDirection, setReverseDirection] = useState<boolean>(true);
+
+  const directionHandler = (buttonName: "Next" | "Back") => {
+    flushSync(() => {
+      setReverseDirection(buttonName === "Next" ? false : true);
+    });
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -32,8 +39,17 @@ function App() {
           element={
             <>
               <Header />
-              <BreadCrums activeStep={activeStep} setActiveStep={setActiveStep} />
-              <Questions activeStep={activeStep} setActiveStep={setActiveStep} />
+              <BreadCrums
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                directionHandler={directionHandler}
+              />
+              <Questions
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                directionHandler={directionHandler}
+                reverseDirection={reverseDirection}
+              />
               <Footer />
             </>
           }

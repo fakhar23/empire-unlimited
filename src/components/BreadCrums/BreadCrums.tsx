@@ -6,9 +6,10 @@ import { quizSteps, QuizStep } from "../../App";
 interface Props {
   activeStep: QuizStep;
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-export default function BreadCrums({ activeStep, setActiveStep }: Props) {
+export default function BreadCrums({ activeStep, setActiveStep, directionHandler }: Props) {
   const Iscompleted = (someStep: QuizStep) => {
     const indexOfActiveSetp = quizSteps.findIndex((step) => activeStep === step);
     const indexOfSomeSetp = quizSteps.findIndex((step) => someStep === step);
@@ -21,8 +22,10 @@ export default function BreadCrums({ activeStep, setActiveStep }: Props) {
     activeStep === step ? "white" : Iscompleted(step) ? "white" : "#a7a7a7";
 
   const breadCrumClickHandler = (e: React.MouseEvent<HTMLParagraphElement>) => {
-    if (Iscompleted(e.currentTarget.innerText as QuizStep))
+    if (Iscompleted(e.currentTarget.innerText as QuizStep)) {
+      directionHandler("Back");
       setActiveStep(e.currentTarget.innerText as QuizStep);
+    }
   };
 
   return (
@@ -36,9 +39,7 @@ export default function BreadCrums({ activeStep, setActiveStep }: Props) {
           >
             {step}
           </p>
-          {index !== quizSteps.length - 1 && (
-            <BreadCrum fill={Iscompleted(step) ? "white" : undefined} />
-          )}
+          {index < 3 && <BreadCrum fill={Iscompleted(step) ? "white" : undefined} />}
         </React.Fragment>
       ))}
     </div>

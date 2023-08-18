@@ -9,14 +9,15 @@ import { quizSteps } from "../../App";
 import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIncomeGoal } from "../../redux/question2.slice";
+import { setDirection } from "../../redux/direction.slice";
 
 interface Question2Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
+  directionHandler: (direction: "Next" | "Back") => void;
 }
 
-const Question2: React.FC<Question2Props> = ({ setActiveStep }) => {
+const Question2: React.FC<Question2Props> = ({ setActiveStep, directionHandler }) => {
   const dispatch = useDispatch();
-  console.log("dispatch: ", dispatch);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const sliderValue = useSelector((state: RootState) => state.question2);
 
@@ -34,12 +35,18 @@ const Question2: React.FC<Question2Props> = ({ setActiveStep }) => {
         </div>
       </div>
       <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
-        <div onClick={() => setActiveStep(quizSteps[0])}>
+        <div
+          onClick={() => {
+            directionHandler("Back");
+            setActiveStep(quizSteps[0]);
+          }}
+        >
           <Button className="text-white">Back</Button>
         </div>
         <div
           onClick={() => {
             if (!sliderValue) return alert("Please select your goal");
+            directionHandler("Next");
             setActiveStep(quizSteps[2]);
           }}
         >
