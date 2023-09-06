@@ -14,6 +14,7 @@ export type QuizStep =
   | "Spending Time"
   | "Investment"
   | "Email";
+
 export const quizSteps: QuizStep[] = [
   "Online Earning",
   "Earning Income",
@@ -24,7 +25,7 @@ export const quizSteps: QuizStep[] = [
 
 function App() {
   const [activeStep, setActiveStep] = useState<QuizStep>("Online Earning");
-  const [reverseDirection, setReverseDirection] = useState<boolean>(true);
+  const [reverseDirection, setReverseDirection] = useState<boolean>(false);
 
   const directionHandler = (buttonName: "Next" | "Back") => {
     flushSync(() => {

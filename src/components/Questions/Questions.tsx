@@ -16,61 +16,51 @@ interface Props {
   reverseDirection: boolean;
 }
 
-const Questions = ({ activeStep, setActiveStep, directionHandler, reverseDirection }: Props) => {
+const Questions: React.FC<Props> = ({
+  activeStep,
+  setActiveStep,
+  directionHandler,
+  reverseDirection,
+}) => {
   const slideFromRight = {
     initial: { x: "100%", opacity: 1 },
     animate: { x: 0, opacity: 1, transition: { type: "tween" } },
-    exit: { x: "-100%", opacity: 1, transition: { type: "tween" } },
+    exit: { x: "-100%", opacity: 0, transition: { type: "tween" } },
   };
   const slideFromLeft = {
-    initial: { x: "-100%", opacity: 0 },
+    initial: { x: "-100%", opacity: 1 },
     animate: { x: 0, opacity: 1, transition: { type: "tween" } },
     exit: { x: "100%", opacity: 0, transition: { type: "tween" } },
   };
 
+  const steps = [
+    { key: "q1", label: "Online Earning", component: Question1 },
+    { key: "q2", label: "Earning Income", component: Question2 },
+    { key: "q3", label: "Spending Time", component: Question3 },
+    { key: "q4", label: "Investment", component: Question4 },
+    { key: "q5", label: "Email", component: Question5 },
+  ];
+
+  const commonStyles = "mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]";
+
   return (
     <section className="pt-[59px] pb-[30px] px-12 bg-background-black questions-section">
       <h1 className="text-[46px] text-white font-bold text-center mb-[35px]">Questionnaire</h1>
-      <p className="text-[#BABABA] text-[22px] leading-[32px] text-center max-w-[938px] m-auto leading-[145%] question-text">
+      <p className="text-[#BABABA] text-[22px] text-center max-w-[938px] m-auto leading-[145%] question-text">
         We’ve made a list of some of our favorite survey questions to help you conduct research.
         Based on those questions, we would suggest best online course training.
       </p>
       <div className="overflow-x-hidden">
         <AnimatePresence mode="wait">
-          {activeStep === "Online Earning" && (
-            <motion.div key="q1" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-              <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question1 setActiveStep={setActiveStep} directionHandler={directionHandler} />
-              </div>
-            </motion.div>
-          )}
-          {activeStep === "Earning Income" && (
-            <motion.div key="q2" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-              <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question2 setActiveStep={setActiveStep} directionHandler={directionHandler} />
-              </div>
-            </motion.div>
-          )}
-          {activeStep === "Spending Time" && (
-            <motion.div key="q3" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-              <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question3 setActiveStep={setActiveStep} directionHandler={directionHandler} />
-              </div>
-            </motion.div>
-          )}
-          {activeStep === "Investment" && (
-            <motion.div key="q4" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-              <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question4 setActiveStep={setActiveStep} directionHandler={directionHandler} />
-              </div>
-            </motion.div>
-          )}
-          {activeStep === "Email" && (
-            <motion.div key="q5" {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-              <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
-                <Question5 setActiveStep={setActiveStep} directionHandler={directionHandler} />
-              </div>
-            </motion.div>
+          {steps.map(
+            ({ key, label, component: Component }) =>
+              activeStep === label && (
+                <motion.div key={key} {...(reverseDirection ? slideFromLeft : slideFromRight)}>
+                  <div className={commonStyles}>
+                    <Component setActiveStep={setActiveStep} directionHandler={directionHandler} />
+                  </div>
+                </motion.div>
+              )
           )}
         </AnimatePresence>
       </div>

@@ -9,7 +9,6 @@ import { quizSteps } from "../../App";
 import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIncomeGoal } from "../../redux/question2.slice";
-import { setDirection } from "../../redux/direction.slice";
 
 interface Question2Props {
   setActiveStep: React.Dispatch<React.SetStateAction<QuizStep>>;
@@ -17,7 +16,6 @@ interface Question2Props {
 }
 
 const Question2: React.FC<Question2Props> = ({ setActiveStep, directionHandler }) => {
-  const dispatch = useDispatch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const sliderValue = useSelector((state: RootState) => state.question2);
 
@@ -36,7 +34,7 @@ const Question2: React.FC<Question2Props> = ({ setActiveStep, directionHandler }
       </div>
       <div className="flex justify-between m-auto mt-[132px] w-[80%] next-n-back-buttons">
         <div
-          onClick={() => {
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => {
             directionHandler("Back");
             setActiveStep(quizSteps[0]);
           }}
@@ -44,7 +42,7 @@ const Question2: React.FC<Question2Props> = ({ setActiveStep, directionHandler }
           <Button className="text-white">Back</Button>
         </div>
         <div
-          onClick={() => {
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => {
             if (!sliderValue) return alert("Please select your goal");
             directionHandler("Next");
             setActiveStep(quizSteps[2]);
@@ -110,10 +108,8 @@ function ValueLabelComponent(props: any) {
 }
 
 function MySlider() {
-  const value = useSelector((state: RootState) => state.question2);
-  console.log("value: ", value);
-
   const dispatch = useDispatch();
+  const value = useSelector((state: RootState) => state.question2);
 
   const changeHandler = (_: Event, newValue: number | Array<number>) => {
     if (typeof newValue === "number") {

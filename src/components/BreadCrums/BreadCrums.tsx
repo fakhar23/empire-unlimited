@@ -1,5 +1,4 @@
 import React from "react";
-// import BreadCrum from "../../assets/images/BreadCrum.svg";
 
 import { quizSteps, QuizStep } from "../../App";
 
@@ -9,7 +8,7 @@ interface Props {
   directionHandler: (direction: "Next" | "Back") => void;
 }
 
-export default function BreadCrums({ activeStep, setActiveStep, directionHandler }: Props) {
+const BreadCrums: React.FC<Props> = ({ activeStep, setActiveStep, directionHandler }) => {
   const Iscompleted = (someStep: QuizStep) => {
     const indexOfActiveSetp = quizSteps.findIndex((step) => activeStep === step);
     const indexOfSomeSetp = quizSteps.findIndex((step) => someStep === step);
@@ -39,14 +38,16 @@ export default function BreadCrums({ activeStep, setActiveStep, directionHandler
           >
             {step}
           </p>
-          {index < 3 && <BreadCrum fill={Iscompleted(step) ? "white" : undefined} />}
+          {index < 3 && <BreadCrumSVG fill={Iscompleted(step) ? "white" : ""} />}
         </React.Fragment>
       ))}
     </div>
   );
-}
+};
 
-const BreadCrum = ({ fill }: { fill?: string | false }) => (
+export default BreadCrums;
+
+const BreadCrumSVG = ({ fill }: { fill?: string }) => (
   <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M18.2176 10.5L15.7501 12.9675L23.7651 21L15.7501 29.0325L18.2176 31.5L28.7176 21L18.2176 10.5Z"
