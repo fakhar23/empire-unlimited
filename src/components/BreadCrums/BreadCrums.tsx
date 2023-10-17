@@ -1,5 +1,4 @@
 import React from "react";
-
 import { quizSteps, QuizStep } from "../../App";
 
 interface Props {
@@ -9,27 +8,27 @@ interface Props {
 }
 
 const BreadCrums: React.FC<Props> = ({ activeStep, setActiveStep, directionHandler }) => {
-  const Iscompleted = (someStep: QuizStep) => {
+  const Iscompleted = (someStep: QuizStep): boolean => {
     const indexOfActiveSetp = quizSteps.findIndex((step) => activeStep === step);
     const indexOfSomeSetp = quizSteps.findIndex((step) => someStep === step);
     return indexOfSomeSetp < indexOfActiveSetp;
   };
 
-  const quizStepsBreadCrum = [...quizSteps].slice(0, -1);
-
   const getTextColor = (step: QuizStep) =>
     activeStep === step ? "white" : Iscompleted(step) ? "white" : "#a7a7a7";
 
+  const isQuizStep = (text: string): text is QuizStep => quizSteps.some((step) => step === text);
+
   const breadCrumClickHandler = (e: React.MouseEvent<HTMLParagraphElement>) => {
-    if (Iscompleted(e.currentTarget.innerText as QuizStep)) {
+    if (isQuizStep(e.currentTarget.innerText) && Iscompleted(e.currentTarget.innerText)) {
       directionHandler("Back");
-      setActiveStep(e.currentTarget.innerText as QuizStep);
+      setActiveStep(e.currentTarget.innerText);
     }
   };
 
   return (
     <div className="bg-[#282828] flex justify-evenly items-center text-[#A7A7A7] font-IstokWeb text-24 px-3">
-      {quizStepsBreadCrum.map((step, index) => (
+      {quizSteps.slice(0, -1).map((step, index) => (
         <React.Fragment key={index}>
           <p
             style={{ color: getTextColor(step) }}

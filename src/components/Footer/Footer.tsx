@@ -8,10 +8,7 @@ import { BsGlobe } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./Footer.scss";
 
-interface Props {}
-
-function Footer(props: Props) {
-  console.log("props: ", props);
+function Footer() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");

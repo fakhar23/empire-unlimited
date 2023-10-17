@@ -41,8 +41,6 @@ const Questions: React.FC<Props> = ({
     { key: "q5", label: "Email", component: Question5 },
   ];
 
-  const commonStyles = "mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]";
-
   return (
     <section className="pt-[59px] pb-[30px] px-12 bg-background-black questions-section">
       <h1 className="text-[46px] text-white font-bold text-center mb-[35px]">Questionnaire</h1>
@@ -56,7 +54,7 @@ const Questions: React.FC<Props> = ({
             ({ key, label, component: Component }) =>
               activeStep === label && (
                 <motion.div key={key} {...(reverseDirection ? slideFromLeft : slideFromRight)}>
-                  <div className={commonStyles}>
+                  <div className="mt-[41px] bg-[#232323] py-[2rem] px-[8px] rounded-lg pb-[120px]">
                     <Component setActiveStep={setActiveStep} directionHandler={directionHandler} />
                   </div>
                 </motion.div>

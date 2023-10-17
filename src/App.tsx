@@ -1,10 +1,12 @@
+/* eslint-disable prefer-const */
+/* eslint-disable react-refresh/only-export-components */
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BreadCrums from "./components/BreadCrums/BreadCrums";
 import Header from "./components/Header/Header";
 import Questions from "./components/Questions/Questions";
-import { useState } from "react";
+import React, { useState } from "react";
 import Results from "./containers/Results";
 import { flushSync } from "react-dom";
 
@@ -27,7 +29,7 @@ function App() {
   const [activeStep, setActiveStep] = useState<QuizStep>("Online Earning");
   const [reverseDirection, setReverseDirection] = useState<boolean>(false);
 
-  const directionHandler = (buttonName: "Next" | "Back") => {
+  const directionHandler = (buttonName: "Next" | "Back"): void => {
     flushSync(() => {
       setReverseDirection(buttonName === "Next" ? false : true);
     });
@@ -38,7 +40,7 @@ function App() {
         <Route
           path="/"
           element={
-            <>
+            <React.Fragment>
               <Header />
               <BreadCrums
                 activeStep={activeStep}
@@ -52,7 +54,7 @@ function App() {
                 reverseDirection={reverseDirection}
               />
               <Footer />
-            </>
+            </React.Fragment>
           }
         />
         <Route path="/results" element={<Results />} />
